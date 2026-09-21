@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALM — Consulenza commerciale e management per la PMI manifatturiera</title>
+<meta name="description" content="ALM di Alberto Mariani. Struttura commerciale, sviluppo del portafoglio clienti e direzione vendite per le piccole e medie imprese manifatturiere del Piemonte e della Liguria.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16212B;        /* grafite */
+    --ink-deep:#0F171E;   /* fondo hero */
+    --amber:#F0A202;      /* ambra industriale */
+    --paper:#F6F5F2;      /* carta */
+    --steel:#5A6773;      /* acciaio */
+    --line:#26333F;       /* righe su scuro */
+    --line-light:#E1DED6; /* righe su carta */
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"IBM Plex Sans",system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .mono{font-family:"IBM Plex Mono",monospace;letter-spacing:.04em}
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--steel);
+  }
+
+  /* ---------- linea di taglio (elemento firma) ---------- */
+  .cutline{position:relative;height:1px;background:var(--line-light)}
+  .cutline::before{
+    content:"";position:absolute;left:0;top:0;height:1px;width:64px;background:var(--amber)
+  }
+  .cutline::after{
+    content:"";position:absolute;left:64px;top:-3px;width:1px;height:7px;background:var(--amber)
+  }
+  .cutline.dark{background:var(--line)}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(15,23,30,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .bar{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .mark{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .mark .amberbar{width:22px;height:5px;background:var(--amber);flex:none}
+  .mark .letters{
+    font-family:"Oswald",sans-serif;font-weight:700;font-size:1.5rem;
+    letter-spacing:.06em;color:#fff;line-height:1;
+  }
+  nav{display:flex;gap:30px}
+  nav a{
+    font-family:"IBM Plex Mono",monospace;font-size:.8rem;letter-spacing:.06em;
+    color:#B9C2CB;text-decoration:none;transition:color .2s;
+  }
+  nav a:hover{color:var(--amber)}
+  .nav-toggle{display:none}
+
+  /* ---------- hero ---------- */
+  .hero{background:var(--ink-deep);color:#fff;padding:96px 0 108px;overflow:hidden;position:relative}
+  .hero .wrap{position:relative;z-index:2}
+  .hero .eyebrow{color:var(--amber)}
+  .hero h1{
+    font-family:"Oswald",sans-serif;font-weight:600;
+    font-size:clamp(2.7rem,7vw,5.2rem);line-height:.98;letter-spacing:.005em;
+    text-transform:uppercase;margin:22px 0 0;max-width:16ch;
+  }
+  .hero h1 .amber{color:var(--amber)}
+  .hero .lead{
+    margin-top:28px;max-width:52ch;font-size:1.12rem;color:#C7CFD6;
+  }
+  .hero-actions{margin-top:40px;display:flex;gap:16px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:"IBM Plex Mono",monospace;font-size:.85rem;letter-spacing:.05em;
+    text-decoration:none;padding:14px 22px;transition:.2s;
+  }
+  .btn-primary{background:var(--amber);color:var(--ink-deep);font-weight:500}
+  .btn-primary:hover{background:#ffb62e}
+  .btn-ghost{color:#fff;border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+  /* riga di taglio dimensionata come una quota tecnica nel hero */
+  .hero-rule{
+    position:absolute;left:0;right:0;bottom:46px;height:1px;background:var(--line);z-index:1
+  }
+  .hero-rule span{
+    position:absolute;left:28px;top:-3px;height:7px;width:1px;background:var(--amber)
+  }
+  .hero-rule .tag{
+    position:absolute;left:40px;top:-22px;width:auto;height:auto;background:none;
+    font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.2em;color:var(--steel);
+    text-transform:uppercase;
+  }
+
+  /* ---------- promessa (perché ALM) ---------- */
+  .promessa{padding:74px 0 72px}
+  .promessa .eyebrow{margin-bottom:26px;display:block}
+  .promessa-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .promo{background:var(--ink-deep);color:#fff;padding:40px 34px;position:relative;overflow:hidden}
+  .promo::before{content:"";position:absolute;left:0;top:0;width:64px;height:4px;background:var(--amber)}
+  .promo-k{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
+  .promo-title{font-family:"Oswald",sans-serif;font-weight:600;text-transform:uppercase;font-size:clamp(1.5rem,3vw,2.15rem);line-height:1.04;letter-spacing:.01em;margin:18px 0 14px;max-width:20ch}
+  .promo-title .amber{color:var(--amber)}
+  .promo p{color:#C7CFD6;font-size:1rem}
+
+  /* ---------- sezioni ---------- */
+  section{padding:86px 0;scroll-margin-top:84px}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px}
+  .sec-num{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--amber)}
+  h2{
+    font-family:"Oswald",sans-serif;font-weight:600;text-transform:uppercase;
+    font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.02;letter-spacing:.01em;margin-top:14px;
+  }
+  .sec-intro{max-width:56ch;color:var(--steel);margin-top:16px;font-size:1.05rem}
+
+  /* servizi */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line-light);margin-top:48px;border:1px solid var(--line-light)}
+  .card{background:var(--paper);padding:34px 30px}
+  .card .k{font-family:"IBM Plex Mono",monospace;font-size:.75rem;color:var(--amber);letter-spacing:.12em}
+  .card h3{font-family:"Oswald",sans-serif;font-weight:500;text-transform:uppercase;font-size:1.35rem;margin:14px 0 12px;letter-spacing:.02em}
+  .card p{color:var(--steel);font-size:.98rem}
+  .card-link{display:block;text-decoration:none;color:inherit;transition:background .2s}
+  .card-link:hover{background:#fff}
+  .card-link:hover h3{color:var(--amber)}
+  .card-link .go{display:inline-block;margin-top:16px;font-family:"IBM Plex Mono",monospace;font-size:.8rem;letter-spacing:.05em;color:var(--amber)}
+  .foot-link+.foot-link{margin-left:18px}
+
+  /* metodo */
+  .metodo{background:var(--ink);color:#fff}
+  .metodo h2{color:#fff}
+  .metodo .sec-intro{color:#AEB8C1}
+  .steps{margin-top:52px;display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .step{padding:0 26px 0 0;position:relative}
+  .step + .step{padding-left:26px;border-left:1px solid var(--line)}
+  .step .n{font-family:"Oswald",sans-serif;font-weight:700;font-size:2.6rem;color:var(--amber);line-height:1}
+  .step h4{font-family:"Oswald",sans-serif;font-weight:500;text-transform:uppercase;font-size:1.15rem;margin:14px 0 10px;letter-spacing:.03em}
+  .step p{color:#AEB8C1;font-size:.92rem}
+
+  /* per chi */
+  .perchi{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+  .facts{margin-top:38px;border-top:1px solid var(--line-light)}
+  .fact{display:flex;gap:22px;padding:22px 0;border-bottom:1px solid var(--line-light);align-items:baseline}
+  .fact .big{font-family:"Oswald",sans-serif;font-weight:700;font-size:2.1rem;color:var(--ink);line-height:1;flex:none;min-width:104px}
+  .fact .lbl{color:var(--steel);font-size:.98rem}
+  .zones{background:var(--ink-deep);color:#fff;padding:40px 34px}
+  .zones .eyebrow{color:var(--amber)}
+  .zones ul{list-style:none;margin-top:20px}
+  .zones li{padding:14px 0;border-bottom:1px solid var(--line);font-family:"Oswald",sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:.03em;font-size:1.25rem}
+  .zones li:last-child{border-bottom:none}
+  .zones li span{font-family:"IBM Plex Mono",monospace;font-weight:400;font-size:.72rem;letter-spacing:.1em;color:var(--steel);display:block;text-transform:none}
+
+  /* contatti */
+  .contatti{background:var(--amber);color:var(--ink-deep)}
+  .contatti h2{color:var(--ink-deep)}
+  .contatti .sec-intro{color:#4a3c10}
+  .cta-row{margin-top:38px;display:flex;flex-wrap:wrap;gap:14px}
+  .cta-row a{
+    font-family:"IBM Plex Mono",monospace;font-size:.9rem;letter-spacing:.04em;
+    text-decoration:none;color:var(--ink-deep);border:1px solid var(--ink-deep);
+    padding:15px 22px;transition:.2s;display:inline-flex;gap:10px;align-items:center;
+  }
+  .cta-row a:hover{background:var(--ink-deep);color:var(--amber)}
+  .placeholder{outline:2px dashed rgba(22,33,43,.4);outline-offset:3px}
+
+  /* footer */
+  footer{background:var(--ink-deep);color:#8A96A0;padding:52px 0 44px}
+  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-end}
+  .foot .letters{font-family:"Oswald",sans-serif;font-weight:700;color:#fff;font-size:1.4rem;letter-spacing:.06em}
+  .foot .pay{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--steel);margin-top:8px}
+  .foot-link{display:inline-block;margin-top:14px;font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.05em;color:#8A96A0;text-decoration:none}
+  .foot-link:hover{color:var(--amber)}
+  .foot .meta{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.05em;text-align:right}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* responsive */
+  @media(max-width:860px){
+    nav{display:none}
+    .steps{grid-template-columns:1fr 1fr;gap:32px 0}
+    .step{padding:0 20px}
+    .step + .step{border-left:none}
+    .step:nth-child(2n){border-left:1px solid var(--line);padding-left:26px}
+    .perchi{grid-template-columns:1fr;gap:44px}
+  }
+  @media(max-width:700px){
+    .promessa-grid{grid-template-columns:1fr;gap:18px}
+  }
+  @media(max-width:560px){
+    .grid{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .step,.step:nth-child(2n){border-left:none;padding-left:0}
+    .fact .big{min-width:88px;font-size:1.7rem}
+    section{padding:64px 0}
+    .hero{padding:72px 0 88px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    html{scroll-behavior:auto}
+  }
+  a:focus-visible,.btn:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a href="#top" class="mark" aria-label="ALM — home">
+      <span class="amberbar"></span>
+      <span class="letters">ALM</span>
+    </a>
+    <nav>
+      <a href="#perche">Perché ALM</a>
+      <a href="#servizi">Cosa faccio</a>
+      <a href="#metodo">Metodo</a>
+      <a href="#perchi">Per chi</a>
+      <a href="#strumenti">Strumenti</a>
+      <a href="#contatti">Contatti</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">ALM · di Alberto Mariani</p>
+      <h1>Struttura commerciale per chi <span class="amber">produce</span>.</h1>
+      <p class="lead">Consulenza commerciale e management per la piccola e media impresa manifatturiera. Analizzo il portafoglio clienti, costruisco processi di vendita che reggono e affianco la direzione fino ai risultati misurabili.</p>
+      <div class="hero-actions">
+        <a href="#contatti" class="btn btn-primary">Parliamone →</a>
+        <a href="#servizi" class="btn btn-ghost">Cosa faccio</a>
+      </div>
+    </div>
+    <div class="hero-rule"><span></span><em class="tag">// analisi · strategia · esecuzione</em></div>
+  </section>
+
+  <section id="perche" class="promessa">
+    <div class="wrap">
+      <p class="eyebrow" style="color:var(--steel)">Perché ALM</p>
+      <div class="promessa-grid">
+        <div class="promo">
+          <span class="promo-k">// un unico riferimento</span>
+          <h3 class="promo-title">Un solo interlocutore per tutta la parte commerciale</h3>
+          <p>Ordini, fornitori, logistica e analisi del fatturato gestiti da una sola persona. Niente rimbalzi tra uffici o ruoli diversi: sai sempre a chi chiedere.</p>
+        </div>
+        <div class="promo">
+          <span class="promo-k">// tempi certi</span>
+          <h3 class="promo-title"><span class="amber">24 / 48 ore</span></h3>
+          <p>Risoluzione dei problemi operativi — ordini, ricerca materiale, offerte — in tempi rapidi e definiti. Quando serve una risposta, arriva.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servizi">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">01</span></div>
+      <h2>Cosa faccio</h2>
+      <p class="sec-intro">Quattro leve concrete per far crescere le vendite di un'azienda che produce, senza aggiungere struttura che non serve.</p>
+      <div class="grid">
+        <div class="card">
+          <span class="k">A</span>
+          <h3>Analisi del portafoglio clienti</h3>
+          <p>Lettura dei dati di fatturato, concentrazione e marginalità. Individuo dove si nasconde il valore, quali clienti blindare e quali sviluppare.</p>
+        </div>
+        <div class="card">
+          <span class="k">B</span>
+          <h3>Sviluppo e nuovi clienti</h3>
+          <p>Costruzione di liste prospect mirate, primi contatti e trattativa. Ampliamento della gamma sui clienti esistenti e apertura di nuovi mercati.</p>
+        </div>
+        <div class="card">
+          <span class="k">C</span>
+          <h3>Processi e rete vendita</h3>
+          <p>Riordino del ciclo commerciale: offerte, listini, condizioni, follow-up. Organizzazione e coordinamento degli agenti e della forza vendita.</p>
+        </div>
+        <div class="card">
+          <span class="k">D</span>
+          <h3>Direzione commerciale in outsourcing</h3>
+          <p>Affianco l'imprenditore come direttore commerciale a tempo parziale: obiettivi, monitoraggio e responsabilità sui numeri, senza costo fisso pieno.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="cutline"></div></div>
+
+  <section id="metodo" class="metodo">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">02</span></div>
+      <h2>Il metodo</h2>
+      <p class="sec-intro">Un percorso in quattro tempi. Ogni fase produce qualcosa di utilizzabile: niente teoria, solo lavoro che si vede in azienda.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="n">1</div>
+          <h4>Analisi</h4>
+          <p>Fotografo la situazione: clienti, fatturato, margini, rete vendita. Dati alla mano, non impressioni.</p>
+        </div>
+        <div class="step">
+          <div class="n">2</div>
+          <h4>Strategia</h4>
+          <p>Definiamo priorità e obiettivi concreti: chi presidiare, dove crescere, con quali risorse.</p>
+        </div>
+        <div class="step">
+          <div class="n">3</div>
+          <h4>Esecuzione</h4>
+          <p>Metto a terra il piano: contatti, offerte, organizzazione. In campo, non solo sulla carta.</p>
+        </div>
+        <div class="step">
+          <div class="n">4</div>
+          <h4>Misura</h4>
+          <p>Controllo i risultati con indicatori chiari e correggo la rotta. Ciò che non si misura non si migliora.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="perchi">
+    <div class="wrap perchi">
+      <div>
+        <div class="sec-head"><span class="sec-num">03</span></div>
+        <h2>Per chi lavoro</h2>
+        <p class="sec-intro">Piccole e medie imprese manifatturiere che vogliono vendere in modo più strutturato. Chi produce bene ma sente che il commerciale potrebbe rendere di più.</p>
+        <div class="facts">
+          <div class="fact"><span class="big">PMI</span><span class="lbl">Aziende manifatturiere e di produzione, dalla ditta strutturata alla media impresa.</span></div>
+          <div class="fact"><span class="big">20+</span><span class="lbl">Anni di esperienza commerciale sul campo, dalla vendita alla direzione.</span></div>
+          <div class="fact"><span class="big">B2B</span><span class="lbl">Forniture industriali, materiali tecnici, componentistica e semilavorati.</span></div>
+        </div>
+      </div>
+      <div class="zones">
+        <p class="eyebrow">Aree operative</p>
+        <ul>
+          <li>Piemonte</li>
+          <li>Liguria<span>Genova, Savona, La Spezia</span></li>
+          <li>Da remoto<span>affiancamento continuativo</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="cutline"></div></div>
+
+  <section id="strumenti">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">04</span></div>
+      <h2>Strumenti da usare subito</h2>
+      <p class="sec-intro">Due calcolatori gratuiti, senza registrazione e senza lasciare l'email. Servono a mettere un numero dove di solito c'è una sensazione: bastano tre cifre e un minuto.</p>
+      <div class="grid">
+        <a class="card card-link" href="calcolatore.html">
+          <span class="k">01</span>
+          <h3>Le trattative che non vince nessuno</h3>
+          <p>Quante delle tue trattative chiuse non le ha vinte un concorrente, ma l'indecisione di chi doveva firmare. La ricerca internazionale le colloca fra il 40% e il 60%: scopri dove sei tu.</p>
+          <span class="go">Apri il calcolatore →</span>
+        </a>
+        <a class="card card-link" href="sconto.html">
+          <span class="k">02</span>
+          <h3>Il prezzo dello sconto</h3>
+          <p>Quanto volume in più devi vendere per recuperare uno sconto. Con un margine del 30%, quel 5% concesso in trattativa te ne richiede il 20% in più solo per pareggiare.</p>
+          <span class="go">Apri il calcolatore →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="cutline"></div></div>
+
+  <section id="contatti" class="contatti">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num" style="color:var(--ink-deep)">05</span></div>
+      <h2>Parliamo della tua azienda</h2>
+      <p class="sec-intro">Una prima chiacchierata senza impegno per capire dove il commerciale può rendere di più. Scrivimi o chiamami.</p>
+      <div class="cta-row">
+        <a href="mailto:albertomariani2@gmail.com">✉ albertomariani2@gmail.com</a>
+        <a href="tel:+393490796956">☎ +39 349 079 6956</a>
+        <a href="https://www.linkedin.com/in/alberto-mariani-a5a6b73a7" target="_blank" rel="noopener">in LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="letters">ALM</div>
+      <div class="pay">Consulenza e management aziendale</div>
+      <a class="foot-link" href="calcolatore.html">Calcolatore trattative</a>
+      <a class="foot-link" href="sconto.html">Calcolatore sconto</a>
+      <a class="foot-link" href="privacy.html">Privacy &amp; note legali</a>
+    </div>
+    <div class="meta">
+      Alberto Mariani · Ditta individuale<br>
+      P.IVA 02798730061 · © 2026
+    </div>
+  </div>
+</footer>
+
+<script>
+  // reveal on scroll (rispetta prefers-reduced-motion)
+  const els=document.querySelectorAll('section .wrap > *, .card, .step, .fact');
+  els.forEach(e=>e.classList.add('reveal'));
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    els.forEach(e=>e.classList.add('in'));
+  }else{
+    const io=new IntersectionObserver((ents)=>{
+      ents.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
+    },{threshold:.12});
+    els.forEach(e=>io.observe(e));
+  }
+</script>
+</body>
+</html>
