@@ -115,7 +115,7 @@
   .promo p{color:#C7CFD6;font-size:1rem}
 
   /* ---------- sezioni ---------- */
-  section{padding:86px 0}
+  section{padding:86px 0;scroll-margin-top:84px}
   .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px}
   .sec-num{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--amber)}
   h2{
@@ -130,6 +130,11 @@
   .card .k{font-family:"IBM Plex Mono",monospace;font-size:.75rem;color:var(--amber);letter-spacing:.12em}
   .card h3{font-family:"Oswald",sans-serif;font-weight:500;text-transform:uppercase;font-size:1.35rem;margin:14px 0 12px;letter-spacing:.02em}
   .card p{color:var(--steel);font-size:.98rem}
+  .card-link{display:block;text-decoration:none;color:inherit;transition:background .2s}
+  .card-link:hover{background:#fff}
+  .card-link:hover h3{color:var(--amber)}
+  .card-link .go{display:inline-block;margin-top:16px;font-family:"IBM Plex Mono",monospace;font-size:.8rem;letter-spacing:.05em;color:var(--amber)}
+  .foot-link+.foot-link{margin-left:18px}
 
   /* metodo */
   .metodo{background:var(--ink);color:#fff}
@@ -221,6 +226,7 @@
       <a href="#servizi">Cosa faccio</a>
       <a href="#metodo">Metodo</a>
       <a href="#perchi">Per chi</a>
+      <a href="#strumenti">Strumenti</a>
       <a href="#contatti">Contatti</a>
     </nav>
   </div>
@@ -346,9 +352,33 @@
 
   <div class="wrap"><div class="cutline"></div></div>
 
+  <section id="strumenti">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">04</span></div>
+      <h2>Strumenti da usare subito</h2>
+      <p class="sec-intro">Due calcolatori gratuiti, senza registrazione e senza lasciare l'email. Servono a mettere un numero dove di solito c'è una sensazione: bastano tre cifre e un minuto.</p>
+      <div class="grid">
+        <a class="card card-link" href="calcolatore.html">
+          <span class="k">01</span>
+          <h3>Le trattative che non vince nessuno</h3>
+          <p>Quante delle tue trattative chiuse non le ha vinte un concorrente, ma l'indecisione di chi doveva firmare. La ricerca internazionale le colloca fra il 40% e il 60%: scopri dove sei tu.</p>
+          <span class="go">Apri il calcolatore →</span>
+        </a>
+        <a class="card card-link" href="sconto.html">
+          <span class="k">02</span>
+          <h3>Il prezzo dello sconto</h3>
+          <p>Quanto volume in più devi vendere per recuperare uno sconto. Con un margine del 30%, quel 5% concesso in trattativa te ne richiede il 20% in più solo per pareggiare.</p>
+          <span class="go">Apri il calcolatore →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="cutline"></div></div>
+
   <section id="contatti" class="contatti">
     <div class="wrap">
-      <div class="sec-head"><span class="sec-num" style="color:var(--ink-deep)">04</span></div>
+      <div class="sec-head"><span class="sec-num" style="color:var(--ink-deep)">05</span></div>
       <h2>Parliamo della tua azienda</h2>
       <p class="sec-intro">Una prima chiacchierata senza impegno per capire dove il commerciale può rendere di più. Scrivimi o chiamami.</p>
       <div class="cta-row">
@@ -366,6 +396,8 @@
     <div>
       <div class="letters">ALM</div>
       <div class="pay">Consulenza e management aziendale</div>
+      <a class="foot-link" href="calcolatore.html">Calcolatore trattative</a>
+      <a class="foot-link" href="sconto.html">Calcolatore sconto</a>
       <a class="foot-link" href="privacy.html">Privacy &amp; note legali</a>
     </div>
     <div class="meta">
