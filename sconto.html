@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Quanto volume in più devi vendere per recuperare uno sconto? Calcolo gratuito di ALM Consulenza &amp; Management per PMI manifatturiere.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Uno sconto del 5% non ti costa il 5%.">
+<meta property="og:description" content="Con un margine del 30%, uno sconto del 5% ti obbliga a vendere il 20% in più solo per pareggiare. Rifai il conto con i tuoi numeri.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:url" content="https://almconsulenzamanagement.it/sconto.html">
+<title>Il prezzo dello sconto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ink:#17181A;
+    --ink-soft:#3A3C3F;
+    --paper:#F2F2F0;
+    --paper-raised:#FBFBFA;
+    --line:#D8D8D4;
+    --line-dark:#2E3033;
+    --muted:#6E7073;
+    --muted-dark:#9A9A94;
+    --amber:#E0A23A;
+    --amber-ink:#8A5A08;
+    --good:#35704A;
+    --warn:#C2701C;
+    --bad:#B23A2F;
+    --bad-bright:#E8412F;
+    --bad-soft:#F2604E;
+    color-scheme: light;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:Barlow,"Segoe UI",system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:Oswald,"Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;margin:0;text-wrap:balance;line-height:1.05}
+  p{margin:0}
+  .wrap{max-width:760px;margin:0 auto;padding-inline:20px}
+
+  /* hero */
+  .hero{background:var(--ink);color:#F5F4F0;padding-block:44px 40px}
+  .eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+  .eyebrow span{font-family:Oswald,Arial,sans-serif;font-size:13px;font-weight:500;letter-spacing:3px;color:var(--amber);text-transform:uppercase}
+  .eyebrow i{display:block;width:30px;height:3px;background:var(--amber);flex:none}
+  .hero h1{font-size:clamp(32px,8.4vw,54px)}
+  .hero h1 em{font-style:normal;color:var(--amber);display:block}
+  .hero .lede{margin-top:18px;font-size:clamp(17px,4.2vw,21px);color:#C7C7C1;max-width:36em}
+  .hero .lede b{color:var(--bad-soft);font-weight:600}
+
+  /* calculator */
+  .calc{padding-block:44px}
+  .calc h2{font-size:clamp(24px,6vw,34px)}
+  .calc .sub{margin-top:12px;color:var(--ink-soft);max-width:38em}
+
+  .fields{margin-top:28px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field label{font-family:Oswald,Arial,sans-serif;font-size:12.5px;font-weight:500;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-soft);line-height:1.3}
+  .field input{
+    font-family:Barlow,sans-serif;font-size:21px;font-weight:600;
+    font-variant-numeric:tabular-nums;
+    padding:11px 13px;border:1.5px solid var(--line);border-radius:3px;
+    background:var(--paper-raised);color:var(--ink);width:100%;
+  }
+  .field input:focus{outline:2.5px solid var(--amber);outline-offset:1px;border-color:transparent}
+  .hint{margin-top:11px;font-size:14px;color:var(--muted)}
+
+  /* result */
+  .result{margin-top:30px;border-top:3px solid var(--ink);padding-top:26px}
+  .headline{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px}
+  .bignum{font-family:Oswald,Arial,sans-serif;font-size:clamp(52px,15vw,80px);font-weight:700;line-height:.9;font-variant-numeric:tabular-nums;color:var(--bad)}
+  .bigcap{font-size:16px;line-height:1.35;color:var(--ink-soft);max-width:23em}
+
+  .pair{margin-top:26px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .stat{background:var(--paper-raised);border:1px solid var(--line);padding:16px 18px}
+  .stat .v{font-family:Oswald,Arial,sans-serif;font-size:30px;font-weight:700;line-height:1.05;font-variant-numeric:tabular-nums}
+  .stat .k{margin-top:5px;font-size:14.5px;line-height:1.35;color:var(--muted)}
+
+  .mirror{margin-top:22px;border-left:5px solid var(--good);padding:14px 0 14px 16px}
+  .mirror h3{font-size:17px;letter-spacing:1.2px;color:var(--good)}
+  .mirror p{margin-top:5px;font-size:16px;color:var(--ink-soft)}
+
+  /* chart */
+  .chartwrap{margin-top:34px}
+  .chartwrap h3{font-size:14px;letter-spacing:2px;color:var(--amber-ink)}
+  .chartwrap svg{display:block;width:100%;height:auto;max-width:100%;margin-top:12px}
+  .chartnote{margin-top:8px;font-size:13.5px;line-height:1.45;color:var(--muted)}
+
+  /* table */
+  .tablewrap{margin-top:34px}
+  .tablewrap h3{font-size:14px;letter-spacing:2px;color:var(--amber-ink);margin-bottom:12px}
+  .scroller{overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:360px;font-variant-numeric:tabular-nums}
+  th,td{text-align:right;padding:10px 12px;border-bottom:1px solid var(--line);font-size:16px}
+  th:first-child,td:first-child{text-align:left}
+  thead th{font-family:Oswald,Arial,sans-serif;font-size:12.5px;font-weight:500;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-soft);border-bottom:2px solid var(--ink)}
+  tbody tr.here td{background:#FBF1DF;font-weight:600}
+  td.bad{color:var(--bad);font-weight:600}
+
+  /* capture */
+  .capture{background:var(--ink);color:#F5F4F0;padding-block:40px;margin-top:44px}
+  .capture h2{font-size:clamp(22px,5.4vw,30px)}
+  .capture .sub{margin-top:12px;color:#C7C7C1;max-width:36em}
+  .capture ul{margin:18px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+  .capture li{position:relative;padding-left:22px;font-size:16px;color:#C7C7C1}
+  .capture li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;background:var(--amber)}
+  .cta{margin-top:26px;display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+  .wa{
+    display:inline-flex;align-items:center;gap:11px;text-decoration:none;
+    font-family:Oswald,Arial,sans-serif;font-size:16px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;
+    background:var(--amber);color:var(--ink);border:none;border-radius:3px;padding:15px 24px;cursor:pointer;
+  }
+  .wa:hover{background:#F0B95C}
+  .wa:focus-visible{outline:2.5px solid #F5F4F0;outline-offset:3px}
+  .wa svg{flex:none;display:block}
+  .wa-note{font-size:14.5px;line-height:1.45;color:var(--muted-dark);max-width:34em}
+
+  /* footer */
+  footer{padding-block:34px 40px}
+  footer h3{font-size:13px;letter-spacing:2px;color:var(--amber-ink)}
+  footer .srcs{margin-top:12px;display:flex;flex-direction:column;gap:9px;font-size:13.5px;line-height:1.45;color:var(--muted)}
+  .formula{font-family:Oswald,Arial,sans-serif;font-size:17px;letter-spacing:.5px;color:var(--ink);background:var(--paper-raised);border:1px solid var(--line);padding:11px 14px;display:inline-block}
+  .sig{margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
+  .sig .nm{font-family:Oswald,Arial,sans-serif;font-size:25px;font-weight:700;letter-spacing:4px}
+  .sig .rule{width:150px;height:3px;background:var(--amber);margin:6px 0}
+  .sig .ds{font-family:Oswald,Arial,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+  .sig .pv{margin-top:14px;font-size:12.5px;color:var(--muted);line-height:1.45}
+  .sig .pv a{color:var(--amber-ink)}
+
+  @media (max-width:560px){
+    .fields{grid-template-columns:1fr}
+    .pair{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important}
+  }
+</style>
+</head>
+<body>
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><i></i><span>Vendita B2B industriale</span></div>
+    <h1>Uno sconto del 5%<em>non ti costa il 5%.</em></h1>
+    <p class="lede">Con un margine lordo del 30%, quel 5% concesso in trattativa ti obbliga a vendere <b>il 20% in più</b> solo per guadagnare come prima. Sotto puoi rifare il conto con i tuoi numeri.</p>
+  </div>
+</section>
+
+<section class="calc">
+  <div class="wrap">
+    <h2>I tuoi numeri</h2>
+    <p class="sub">Serve il margine lordo — ricavi meno costo del venduto — non l'utile netto. Se non lo conosci con precisione, una stima ragionevole basta per capire l'ordine di grandezza.</p>
+
+    <div class="fields">
+      <div class="field">
+        <label for="fatturato">Fatturato annuo (€)</label>
+        <input id="fatturato" type="number" inputmode="numeric" min="0" step="50000" value="2000000">
+      </div>
+      <div class="field">
+        <label for="margine">Margine lordo (%)</label>
+        <input id="margine" type="number" inputmode="decimal" min="1" max="99" step="1" value="30">
+      </div>
+      <div class="field">
+        <label for="sconto">Sconto medio concesso (%)</label>
+        <input id="sconto" type="number" inputmode="decimal" min="0" max="99" step="0.5" value="5">
+      </div>
+    </div>
+    <p class="hint" id="hint">Valori di esempio: sostituiscili con i tuoi.</p>
+
+    <div class="result">
+      <div class="headline">
+        <div class="bignum" id="pct">+20%</div>
+        <p class="bigcap" id="pctcap">di volume in più, solo per tornare a guadagnare quanto guadagnavi prima dello sconto.</p>
+      </div>
+
+      <div class="pair">
+        <div class="stat">
+          <div class="v" id="perso">€ 100.000</div>
+          <div class="k">di utile lordo in meno ogni anno, se i volumi restano quelli di oggi</div>
+        </div>
+        <div class="stat">
+          <div class="v" id="extra">€ 400.000</div>
+          <div class="k">di fatturato aggiuntivo necessario per pareggiare</div>
+        </div>
+      </div>
+
+      <div class="mirror" id="mirror">
+        <h3 id="mtitle">E se invece alzassi i prezzi?</h3>
+        <p id="mtext">Alzando i listini del 5% potresti perdere fino al 14,3% dei volumi e guadagnare esattamente come oggi. È la stessa matematica, letta dall'altra parte.</p>
+      </div>
+
+      <div class="chartwrap">
+        <h3>Il volume necessario, al crescere dello sconto</h3>
+        <svg viewBox="0 0 420 240" role="img" aria-label="Curva del volume aggiuntivo necessario al crescere dello sconto concesso: cresce lentamente all'inizio e poi esplode quando lo sconto si avvicina al margine lordo.">
+          <line x1="34" y1="20" x2="400" y2="20" stroke="#DCDCD8" stroke-width="1"></line>
+          <line x1="34" y1="105" x2="400" y2="105" stroke="#DCDCD8" stroke-width="1"></line>
+
+          <text x="30" y="23" text-anchor="end" font-family="Barlow,sans-serif" font-size="8.5" fill="#6E7073">100%</text>
+          <text x="30" y="108" text-anchor="end" font-family="Barlow,sans-serif" font-size="8.5" fill="#6E7073">50%</text>
+          <text x="30" y="193" text-anchor="end" font-family="Barlow,sans-serif" font-size="8.5" fill="#6E7073">0</text>
+
+          <path id="area" d="" fill="#B23A2F" fill-opacity="0.10"></path>
+          <line id="asym" x1="0" y1="20" x2="0" y2="190" stroke="#B23A2F" stroke-width="1.2" stroke-dasharray="4 3" opacity="0"></line>
+          <text id="asymlab" x="0" y="15" text-anchor="middle" font-family="Oswald,Arial,sans-serif" font-size="9" font-weight="600" fill="#B23A2F" opacity="0">MARGINE</text>
+
+          <line x1="34" y1="20" x2="34" y2="190" stroke="#8A8C8F" stroke-width="1.2"></line>
+          <line x1="34" y1="190" x2="400" y2="190" stroke="#8A8C8F" stroke-width="1.2"></line>
+
+          <path id="curve" d="" fill="none" stroke="#B23A2F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path>
+
+          <circle id="dot" cx="0" cy="0" r="9" fill="#B23A2F" fill-opacity="0.2" opacity="0"></circle>
+          <circle id="dot2" cx="0" cy="0" r="4.6" fill="#B23A2F" opacity="0"></circle>
+          <text id="dotlab" x="0" y="0" text-anchor="middle" font-family="Oswald,Arial,sans-serif" font-size="12" font-weight="700" fill="#B23A2F" opacity="0"></text>
+
+          <text x="34" y="208" text-anchor="middle" font-family="Barlow,sans-serif" font-size="9" fill="#6E7073">0%</text>
+          <text x="156" y="208" text-anchor="middle" font-family="Barlow,sans-serif" font-size="9" fill="#6E7073">5%</text>
+          <text x="278" y="208" text-anchor="middle" font-family="Barlow,sans-serif" font-size="9" fill="#6E7073">10%</text>
+          <text x="400" y="208" text-anchor="middle" font-family="Barlow,sans-serif" font-size="9" fill="#6E7073">15%</text>
+
+          <text x="400" y="228" text-anchor="end" font-family="Oswald,Arial,sans-serif" font-size="9.5" font-weight="500" letter-spacing="1.6" fill="#6E7073">SCONTO CONCESSO →</text>
+          <text x="6" y="105" text-anchor="middle" transform="rotate(-90 6 105)" font-family="Oswald,Arial,sans-serif" font-size="8.5" font-weight="500" letter-spacing="1.3" fill="#6E7073">VOLUME NECESSARIO</text>
+        </svg>
+        <p class="chartnote">La curva non è una retta: ogni punto di sconto in più pesa più del precedente, e quando lo sconto si avvicina al margine il volume richiesto tende all'infinito. Oltre quella soglia non esiste nessun volume che recuperi la perdita.</p>
+      </div>
+
+      <div class="tablewrap">
+        <h3>Con il tuo margine, sconto per sconto</h3>
+        <div class="scroller">
+          <table>
+            <thead>
+              <tr>
+                <th>Sconto concesso</th>
+                <th>Volume necessario</th>
+                <th>Fatturato agg.</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="capture">
+  <div class="wrap">
+    <h2>Il problema non è il prezzo</h2>
+    <p class="sub">Quando una rete vendita sconta per abitudine, quasi sempre è perché non ha altri argomenti pronti nel momento in cui il cliente esita. Lo sconto è il sintomo, non la causa.</p>
+    <ul>
+      <li>Da dove nasce la richiesta di sconto, e cosa la sostituisce</li>
+      <li>Il foglio per misurare quante trattative perdi senza che le vinca un concorrente</li>
+      <li>Come si costruisce un listino che regge la trattativa</li>
+    </ul>
+
+    <div class="cta">
+      <a class="wa" id="walink" href="https://wa.me/393490796956" target="_blank" rel="noopener">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 20.5l1.6-4.9A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4Z"></path>
+        </svg>
+        Scrivimi su WhatsApp
+      </a>
+      <p class="wa-note">Si apre WhatsApp con il messaggio già scritto, con dentro i numeri che hai appena calcolato. Puoi leggerlo e modificarlo prima di inviarlo: niente parte finché non lo mandi tu.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <h3>Come si calcola</h3>
+    <div class="srcs">
+      <p><span class="formula">volume necessario = sconto ÷ (margine − sconto)</span></p>
+      <p>Con margine 30% e sconto 5%: 5 ÷ (30 − 5) = 0,20, cioè il 20% di volume in più. Il calcolo tiene fermo l'utile lordo in valore assoluto: lo sconto riduce il ricavo per unità ma non il costo del venduto, quindi il margine per unità si assottiglia e servono più unità per arrivare allo stesso guadagno.</p>
+      <p>Due precisazioni oneste. La formula usa il <strong>margine lordo</strong> — ricavi meno costo del venduto — non l'utile netto: mettere quest'ultimo restituisce numeri molto più drammatici ma sbagliati. E presume che il volume aggiuntivo si possa produrre e servire senza costi fissi in più: se per venderne il 20% in più servono un capannone o due persone, il conto reale peggiora ancora.</p>
+      <p>La lettura speculare — di quanto puoi permetterti di perdere volumi alzando i prezzi — usa la stessa logica: aumento ÷ (margine + aumento).</p>
+    </div>
+
+    <div class="sig">
+      <div class="nm">ALM</div>
+      <div class="rule"></div>
+      <div class="ds">Consulenza &amp; Management</div>
+      <p class="pv">Consulenza commerciale e direzione vendite per PMI manifatturiere. I numeri che inserisci restano sul tuo dispositivo: questa pagina non li salva e non li trasmette a nessuno. Vedi anche il <a href="/calcolatore">calcolatore delle trattative perse</a>.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var F = document.getElementById('fatturato'),
+      M = document.getElementById('margine'),
+      S = document.getElementById('sconto'),
+      pct = document.getElementById('pct'),
+      pctcap = document.getElementById('pctcap'),
+      perso = document.getElementById('perso'),
+      extra = document.getElementById('extra'),
+      mirror = document.getElementById('mirror'),
+      mtitle = document.getElementById('mtitle'),
+      mtext = document.getElementById('mtext'),
+      tbody = document.getElementById('tbody'),
+      hint = document.getElementById('hint'),
+      curve = document.getElementById('curve'),
+      area = document.getElementById('area'),
+      asym = document.getElementById('asym'),
+      asymlab = document.getElementById('asymlab'),
+      dot = document.getElementById('dot'),
+      dot2 = document.getElementById('dot2'),
+      dotlab = document.getElementById('dotlab'),
+      walink = document.getElementById('walink');
+
+  var nf0 = new Intl.NumberFormat('it-IT',{maximumFractionDigits:0});
+  var nf1 = new Intl.NumberFormat('it-IT',{minimumFractionDigits:1,maximumFractionDigits:1});
+
+  var X0 = 34, X1 = 400, Y0 = 190, Y1 = 20, SMAX = 15, VMAX = 100;
+  function xs(s){ return X0 + (Math.min(s, SMAX) / SMAX) * (X1 - X0); }
+  function ys(v){ return Y0 - (Math.min(v, VMAX) / VMAX) * (Y0 - Y1); }
+
+  function n(el){ var v = parseFloat(String(el.value).replace(',', '.')); return isFinite(v) ? v : 0; }
+  function eur(x){ return '€ ' + nf0.format(Math.round(x)); }
+  function dec(x){ return nf1.format(x).replace('.', ','); }
+
+  function drawCurve(m){
+    if (!(m > 0)){ curve.setAttribute('d',''); area.setAttribute('d',''); asym.setAttribute('opacity',0); asymlab.setAttribute('opacity',0); return; }
+    var pts = [], s;
+    for (s = 0; s <= SMAX + 0.001; s += 0.1){
+      if (s >= m - 0.05) break;
+      var v = s / (m - s) * 100;
+      pts.push([xs(s), ys(v)]);
+      if (v >= VMAX) break;
+    }
+    if (pts.length < 2){ curve.setAttribute('d',''); area.setAttribute('d',''); }
+    else {
+      var d = 'M' + pts.map(function(p){ return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' L');
+      curve.setAttribute('d', d);
+      var last = pts[pts.length - 1];
+      area.setAttribute('d', d + ' L' + last[0].toFixed(1) + ',' + Y0 + ' L' + X0 + ',' + Y0 + ' Z');
+    }
+    if (m <= SMAX){
+      var ax = xs(m);
+      asym.setAttribute('x1', ax); asym.setAttribute('x2', ax); asym.setAttribute('opacity', 1);
+      asymlab.setAttribute('x', Math.min(ax, X1 - 20)); asymlab.setAttribute('opacity', 1);
+    } else {
+      asym.setAttribute('opacity', 0); asymlab.setAttribute('opacity', 0);
+    }
+  }
+
+  function placeDot(m, s, v){
+    if (!(m > 0) || !(s > 0) || v === null || v > VMAX || s > SMAX){
+      dot.setAttribute('opacity',0); dot2.setAttribute('opacity',0); dotlab.setAttribute('opacity',0);
+      return;
+    }
+    var x = xs(s), y = ys(v);
+    dot.setAttribute('cx', x); dot.setAttribute('cy', y); dot.setAttribute('opacity', 1);
+    dot2.setAttribute('cx', x); dot2.setAttribute('cy', y); dot2.setAttribute('opacity', 1);
+    dotlab.setAttribute('x', Math.min(Math.max(x, X0 + 18), X1 - 18));
+    dotlab.setAttribute('y', Math.max(y - 13, 12));
+    dotlab.textContent = '+' + Math.round(v) + '%';
+    dotlab.setAttribute('opacity', 1);
+  }
+
+  function buildTable(m, f, s){
+    tbody.innerHTML = '';
+    var list = [2, 3, 5, 8, 10, 15];
+    if (s > 0 && list.indexOf(s) === -1) { list.push(s); list.sort(function(a,b){ return a-b; }); }
+    list.forEach(function(d){
+      var tr = document.createElement('tr');
+      if (d === s) tr.className = 'here';
+      var c1 = document.createElement('td'); c1.textContent = dec(d) + '%';
+      var c2 = document.createElement('td');
+      var c3 = document.createElement('td');
+      if (m - d <= 0){
+        c2.textContent = 'impossibile'; c2.className = 'bad';
+        c3.textContent = '—';
+      } else {
+        var v = d / (m - d);
+        c2.textContent = '+' + dec(v * 100) + '%';
+        c3.textContent = f > 0 ? eur(f * v) : '—';
+      }
+      tr.appendChild(c1); tr.appendChild(c2); tr.appendChild(c3);
+      tbody.appendChild(tr);
+    });
+  }
+
+  function setWa(m, s, v, lost){
+    var t;
+    if (!(m > 0) || !(s > 0)){
+      t = 'Buongiorno, ho visto il calcolatore dello sconto sul sito ALM e vorrei approfondire il tema dei margini nella mia rete vendita.';
+    } else if (v === null){
+      t = 'Buongiorno, ho usato il calcolatore dello sconto sul sito ALM. Con un margine del ' + dec(m) + '% e uno sconto medio del ' + dec(s) + '% il conto non torna in nessun modo. Vorrei parlarne.';
+    } else {
+      t = 'Buongiorno, ho usato il calcolatore dello sconto sul sito ALM. Con un margine del ' + dec(m) + '% e uno sconto medio del ' + dec(s) + '%, mi servirebbe il ' + dec(v) + '% di volume in più solo per pareggiare';
+      t += lost > 0 ? ', e sto lasciando sul tavolo circa ' + nf0.format(Math.round(lost)) + ' euro di utile lordo all’anno. Vorrei capire come uscirne.' : '. Vorrei capire come uscirne.';
+    }
+    walink.href = 'https://wa.me/393490796956?text=' + encodeURIComponent(t);
+  }
+
+  function paint(){
+    var f = n(F), m = n(M), s = n(S);
+
+    drawCurve(m);
+    buildTable(m, f, s);
+
+    if (!(m > 0) || !(s > 0)){
+      pct.textContent = '—';
+      pct.style.color = 'var(--ink)';
+      pctcap.textContent = 'Inserisci il margine lordo e lo sconto medio che la tua rete vendita concede.';
+      perso.textContent = '—'; extra.textContent = '—';
+      mirror.style.borderLeftColor = 'var(--line)';
+      mtitle.style.color = 'var(--ink)';
+      mtitle.textContent = 'E se invece alzassi i prezzi?';
+      mtext.textContent = 'Compila i campi qui sopra e vedrai anche la lettura speculare: di quanti volumi potresti fare a meno alzando i listini.';
+      placeDot(m, s, null);
+      setWa(m, s, null, 0);
+      return;
+    }
+
+    var lost = f * s / 100;
+
+    if (m - s <= 0){
+      pct.textContent = 'mai';
+      pct.style.color = 'var(--bad)';
+      pctcap.textContent = 'Con questo margine, uno sconto del ' + dec(s) + '% azzera o supera il guadagno: non esiste nessun volume che recuperi la perdita. Ogni pezzo venduto così peggiora il conto.';
+      perso.textContent = f > 0 ? eur(lost) : '—';
+      extra.textContent = 'nessun volume basta';
+      mirror.style.borderLeftColor = 'var(--bad)';
+      mtitle.style.color = 'var(--bad)';
+      mtitle.textContent = 'Sotto il costo';
+      mtext.textContent = 'Qui non è una trattativa aggressiva: è una vendita in perdita. La domanda non è quanto recuperare, è perché quello sconto viene concesso.';
+      placeDot(m, s, null);
+      setWa(m, s, null, lost);
+      return;
+    }
+
+    var v = s / (m - s) * 100;
+    var extraRev = f * (s / (m - s));
+
+    pct.textContent = '+' + dec(v) + '%';
+    pct.style.color = v >= 50 ? 'var(--bad)' : (v >= 20 ? 'var(--warn)' : 'var(--ink)');
+    pctcap.textContent = 'di volume in più, solo per tornare a guadagnare quanto guadagnavi prima dello sconto.';
+
+    perso.textContent = f > 0 ? eur(lost) : '—';
+    extra.textContent = f > 0 ? eur(extraRev) : '—';
+
+    var tol = s / (m + s) * 100;
+    mirror.style.borderLeftColor = 'var(--good)';
+    mtitle.style.color = 'var(--good)';
+    mtitle.textContent = 'E se invece alzassi i prezzi?';
+    mtext.textContent = 'Alzando i listini del ' + dec(s) + '% potresti perdere fino al ' + dec(tol) + '% dei volumi e guadagnare esattamente come oggi. È la stessa matematica, letta dall’altra parte: il prezzo muove il risultato molto più del volume.';
+
+    placeDot(m, s, v);
+    setWa(m, s, v, lost);
+  }
+
+  [F, M, S].forEach(function(el){
+    el.addEventListener('input', function(){ paint(); if (hint) hint.hidden = true; });
+  });
+
+  paint();
+})();
+</script>
+</body>
+</html>
