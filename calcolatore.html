@@ -321,12 +321,15 @@
         <label>Valore ordine (prima dello sconto) <span class="unit">(€)</span></label>
         <input type="number" id="scOrdine" value="9000" step="100" min="0">
 
+        <label>Costo di acquisto dell'ordine <span class="unit">(€)</span></label>
+        <input type="number" id="scCosto" value="6300" step="100" min="0">
+
         <label>Sconto applicato <span class="unit">(%)</span></label>
         <input type="number" id="scSconto" value="4" step="0.5" min="0" max="100">
 
         <div id="scResult" style="margin-top:14px;"></div>
 
-        <div class="note">Usa il Margine % netto calcolato dai tuoi dati annuali (colonna a fianco) per stimare quanto fatturato extra serve a coprire lo sconto concesso su questo ordine.</div>
+        <div class="note">Calcola il margine reale di questo ordine (ricavo − costo di acquisto) e usa quel margine, non quello medio aziendale, per stimare il fatturato extra necessario a coprire lo sconto concesso. Se lasci il costo a 0, usa in automatico il Margine % netto annuale.</div>
       </div>
 
       <div class="card">
@@ -446,7 +449,7 @@
     document.getElementById(id).addEventListener("input", recalc);
   });
 
-  var scIds = ["scOrdine","scSconto"];
+  var scIds = ["scOrdine","scCosto","scSconto"];
   scIds.forEach(function(id){
     document.getElementById(id).addEventListener("input", recalc);
   });
@@ -848,13 +851,20 @@
     updateScontoSimulator(margine);
   }
 
-  function updateScontoSimulator(margine){
+  function updateScontoSimulator(margineAnnuale){
     var ordine = parseFloat(document.getElementById("scOrdine").value)||0;
+    var costo = parseFloat(document.getElementById("scCosto").value)||0;
     var scontoPct = parseFloat(document.getElementById("scSconto").value)||0;
 
     var scontoEuro = ordine * (scontoPct/100);
     var ordineNetto = ordine - scontoEuro;
-    var extraFatturato = margine > 0 ? scontoEuro / margine : null;
+
+    var usaMargineOrdine = costo > 0;
+    var marginePrimo = (usaMargineOrdine && ordine > 0) ? (ordine - costo)/ordine : null;
+    var margineDopo = (usaMargineOrdine && ordineNetto > 0) ? (ordineNetto - costo)/ordineNetto : null;
+    var margineUsato = usaMargineOrdine ? marginePrimo : margineAnnuale;
+
+    var extraFatturato = (margineUsato !== null && margineUsato > 0) ? scontoEuro / margineUsato : null;
     var extraOrdiniEquivalenti = (extraFatturato !== null && ordine > 0) ? extraFatturato / ordine : null;
 
     var box = document.getElementById("scResult");
@@ -871,10 +881,17 @@
 
     row("Sconto concesso", eur(scontoEuro) + " (" + scontoPct.toFixed(1).replace(".",",") + "%)");
     row("Valore ordine netto", eur(ordineNetto));
-    row("Margine % utilizzato", margine>0 ? pct(margine) : "n/d");
+
+    if(usaMargineOrdine){
+      row("Margine lordo ordine (prima sconto)", marginePrimo !== null ? pct(marginePrimo) : "n/d");
+      row("Margine lordo ordine (dopo sconto)", margineDopo !== null ? pct(margineDopo) : "n/d");
+      row("Erosione margine per lo sconto", eur(scontoEuro));
+    } else {
+      row("Margine % utilizzato (annuale)", margineAnnuale>0 ? pct(margineAnnuale) : "n/d");
+    }
 
     var highlight = document.createElement("div");
-    if(margine <= 0 || extraFatturato === null){
+    if(margineUsato === null || margineUsato <= 0 || extraFatturato === null){
       highlight.className = "sc-highlight bad";
       highlight.innerHTML = "<strong>Margine non disponibile o nullo.</strong> Con un margine pari a zero (o negativo) nessun volume aggiuntivo può compensare uno sconto: ogni ordine scontato è una perdita netta.";
     } else {
@@ -882,7 +899,7 @@
       highlight.className = "sc-highlight " + cls;
       highlight.innerHTML =
         "<strong>" + eur(extraFatturato) + " di fatturato extra</strong>" +
-        "Necessari solo per coprire questo sconto (a parità di margine % attuale) — " +
+        "Necessari solo per coprire questo sconto (in base al " + (usaMargineOrdine ? "margine lordo di questo ordine" : "margine % annuale") + ") — " +
         "equivalgono a circa " + extraOrdiniEquivalenti.toFixed(2).replace(".",",") + " ordini identici a questo.";
     }
     box.appendChild(highlight);
