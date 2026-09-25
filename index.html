@@ -59,13 +59,32 @@
     font-family:"Oswald",sans-serif;font-weight:700;font-size:1.5rem;
     letter-spacing:.06em;color:#fff;line-height:1;
   }
-  nav{display:flex;gap:30px}
+  nav{display:flex;gap:30px;align-items:center}
   nav a{
     font-family:"IBM Plex Mono",monospace;font-size:.8rem;letter-spacing:.06em;
     color:#B9C2CB;text-decoration:none;transition:color .2s;
   }
   nav a:hover{color:var(--amber)}
-  .nav-toggle{display:none}
+  nav a.btn-nav{
+    color:var(--ink-deep);background:var(--amber);padding:9px 16px;
+  }
+  nav a.btn-nav:hover{background:#ffb62e;color:var(--ink-deep)}
+
+  /* hamburger button (mobile only) */
+  .nav-toggle{
+    display:none;background:none;border:1px solid var(--line);
+    width:44px;height:44px;flex:none;cursor:pointer;position:relative;
+  }
+  .nav-toggle span{
+    position:absolute;left:12px;right:12px;height:2px;background:#fff;
+    transition:.2s;
+  }
+  .nav-toggle span:nth-child(1){top:15px}
+  .nav-toggle span:nth-child(2){top:21px}
+  .nav-toggle span:nth-child(3){top:27px}
+  .nav-toggle.open span:nth-child(1){top:21px;transform:rotate(45deg)}
+  .nav-toggle.open span:nth-child(2){opacity:0}
+  .nav-toggle.open span:nth-child(3){top:21px;transform:rotate(-45deg)}
 
   /* ---------- hero ---------- */
   .hero{background:var(--ink-deep);color:#fff;padding:96px 0 108px;overflow:hidden;position:relative}
@@ -90,7 +109,6 @@
   .btn-primary:hover{background:#ffb62e}
   .btn-ghost{color:#fff;border:1px solid var(--line)}
   .btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
-  /* riga di taglio dimensionata come una quota tecnica nel hero */
   .hero-rule{
     position:absolute;left:0;right:0;bottom:46px;height:1px;background:var(--line);z-index:1
   }
@@ -171,6 +189,8 @@
     padding:15px 22px;transition:.2s;display:inline-flex;gap:10px;align-items:center;
   }
   .cta-row a:hover{background:var(--ink-deep);color:var(--amber)}
+  .cta-row a.primary{background:var(--ink-deep);color:var(--amber)}
+  .cta-row a.primary:hover{background:#000;color:var(--amber)}
   .placeholder{outline:2px dashed rgba(22,33,43,.4);outline-offset:3px}
 
   /* footer */
@@ -188,7 +208,28 @@
 
   /* responsive */
   @media(max-width:860px){
-    nav{display:none}
+    nav{
+      position:fixed;top:64px;left:0;right:0;bottom:0;
+      background:var(--ink-deep);
+      flex-direction:column;align-items:flex-start;gap:0;
+      padding:8px 28px 28px;
+      transform:translateY(-8px);
+      opacity:0;visibility:hidden;
+      transition:opacity .18s ease,visibility 0s linear .18s,transform .18s ease;
+      overflow-y:auto;
+    }
+    nav.open{
+      opacity:1;visibility:visible;transform:none;
+      transition:opacity .18s ease,visibility 0s linear 0s,transform .18s ease;
+    }
+    nav a{
+      width:100%;padding:18px 0;font-size:.95rem;
+      border-bottom:1px solid var(--line);
+    }
+    nav a.btn-nav{
+      margin-top:18px;padding:14px 16px;text-align:center;border-bottom:none;width:auto;
+    }
+    .nav-toggle{display:block}
     .steps{grid-template-columns:1fr 1fr;gap:32px 0}
     .step{padding:0 20px}
     .step + .step{border-left:none}
@@ -210,7 +251,7 @@
     .reveal{opacity:1;transform:none;transition:none}
     html{scroll-behavior:auto}
   }
-  a:focus-visible,.btn:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+  a:focus-visible,.btn:focus-visible,.nav-toggle:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
 </style>
 </head>
 <body>
@@ -221,14 +262,18 @@
       <span class="amberbar"></span>
       <span class="letters">ALM</span>
     </a>
-    <nav>
+    <nav id="site-nav">
       <a href="#perche">Perché ALM</a>
       <a href="#servizi">Cosa faccio</a>
       <a href="#metodo">Metodo</a>
       <a href="#perchi">Per chi</a>
       <a href="#strumenti">Strumenti</a>
       <a href="#contatti">Contatti</a>
+      <a href="contatti.html" class="btn-nav">Richiedi consulenza</a>
     </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Apri il menu" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -240,7 +285,7 @@
       <h1>Struttura commerciale per chi <span class="amber">produce</span>.</h1>
       <p class="lead">Consulenza commerciale e management per la piccola e media impresa manifatturiera. Analizzo il portafoglio clienti, costruisco processi di vendita che reggono e affianco la direzione fino ai risultati misurabili.</p>
       <div class="hero-actions">
-        <a href="#contatti" class="btn btn-primary">Parliamone →</a>
+        <a href="contatti.html" class="btn btn-primary">Parliamone →</a>
         <a href="#servizi" class="btn btn-ghost">Cosa faccio</a>
       </div>
     </div>
@@ -380,8 +425,9 @@
     <div class="wrap">
       <div class="sec-head"><span class="sec-num" style="color:var(--ink-deep)">05</span></div>
       <h2>Parliamo della tua azienda</h2>
-      <p class="sec-intro">Una prima chiacchierata senza impegno per capire dove il commerciale può rendere di più. Scrivimi o chiamami.</p>
+      <p class="sec-intro">Una prima chiacchierata senza impegno per capire dove il commerciale può rendere di più. Scrivimi, chiamami o compila il form.</p>
       <div class="cta-row">
+        <a href="contatti.html" class="primary">✎ Compila il form di contatto</a>
         <a href="mailto:albertomariani2@gmail.com">✉ albertomariani2@gmail.com</a>
         <a href="tel:+393490796956">☎ +39 349 079 6956</a>
         <a href="https://www.linkedin.com/in/alberto-mariani-a5a6b73a7" target="_blank" rel="noopener">in LinkedIn</a>
@@ -396,6 +442,7 @@
     <div>
       <div class="letters">ALM</div>
       <div class="pay">Consulenza e management aziendale</div>
+      <a class="foot-link" href="contatti.html">Contatti</a>
       <a class="foot-link" href="calcolatore.html">Calcolatore trattative</a>
       <a class="foot-link" href="sconto.html">Calcolatore sconto</a>
       <a class="foot-link" href="privacy.html">Privacy &amp; note legali</a>
@@ -419,6 +466,24 @@
     },{threshold:.12});
     els.forEach(e=>io.observe(e));
   }
+
+  // mobile hamburger menu
+  const toggle=document.getElementById('nav-toggle');
+  const nav=document.getElementById('site-nav');
+  toggle.addEventListener('click',()=>{
+    const isOpen=nav.classList.toggle('open');
+    toggle.classList.toggle('open',isOpen);
+    toggle.setAttribute('aria-expanded',isOpen?'true':'false');
+    toggle.setAttribute('aria-label',isOpen?'Chiudi il menu':'Apri il menu');
+  });
+  nav.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click',()=>{
+      nav.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded','false');
+      toggle.setAttribute('aria-label','Apri il menu');
+    });
+  });
 </script>
 </body>
 </html>
