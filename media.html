@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Media | ALM Consulenza & Management</title>
+<meta name="description" content="Contenuti e materiali ALM: metodo commerciale, numeri da monitorare e gestione della logistica per PMI manifatturiere.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16212B; --ink-deep:#0F171E; --amber:#F0A202;
+    --paper:#F6F5F2; --steel:#5A6773; --line:#26333F; --line-light:#E1DED6;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"IBM Plex Sans",system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(15,23,30,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .mark{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .mark .amberbar{width:22px;height:5px;background:var(--amber);flex:none}
+  .mark .letters{font-family:"Oswald",sans-serif;font-weight:700;font-size:1.5rem;letter-spacing:.06em;color:#fff;line-height:1}
+  nav{display:flex;gap:30px;align-items:center}
+  nav a{font-family:"IBM Plex Mono",monospace;font-size:.8rem;letter-spacing:.06em;color:#B9C2CB;text-decoration:none;transition:color .2s}
+  nav a:hover{color:var(--amber)}
+  nav a.btn-nav{color:var(--ink-deep);background:var(--amber);padding:9px 16px}
+  nav a.btn-nav:hover{background:#ffb62e;color:var(--ink-deep)}
+  .nav-toggle{display:none;background:none;border:1px solid var(--line);width:44px;height:44px;flex:none;cursor:pointer;position:relative}
+  .nav-toggle span{position:absolute;left:12px;right:12px;height:2px;background:#fff;transition:.2s}
+  .nav-toggle span:nth-child(1){top:15px}
+  .nav-toggle span:nth-child(2){top:21px}
+  .nav-toggle span:nth-child(3){top:27px}
+  .nav-toggle.open span:nth-child(1){top:21px;transform:rotate(45deg)}
+  .nav-toggle.open span:nth-child(2){opacity:0}
+  .nav-toggle.open span:nth-child(3){top:21px;transform:rotate(-45deg)}
+
+  .page-hero{background:var(--ink-deep);color:#fff;padding:72px 0 56px}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber)}
+  h1{font-family:"Oswald",sans-serif;font-weight:600;text-transform:uppercase;font-size:clamp(2.1rem,5vw,3.2rem);line-height:1.02;margin-top:16px}
+  .page-hero p{margin-top:18px;max-width:56ch;color:#C7CFD6;font-size:1.05rem}
+
+  section.block{padding:72px 0}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px}
+  .sec-num{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--amber)}
+  h2{font-family:"Oswald",sans-serif;font-weight:600;text-transform:uppercase;font-size:clamp(1.5rem,3.4vw,2.2rem);margin-top:12px}
+  .sec-intro{max-width:60ch;color:var(--steel);margin-top:14px;font-size:1rem}
+
+  .gallery{margin-top:38px;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+  .gallery figure{margin:0;background:var(--ink-deep);overflow:hidden;position:relative}
+  .gallery img{display:block;width:100%;height:auto}
+  .gallery.single{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+
+  footer{background:var(--ink-deep);color:#8A96A0;padding:52px 0 44px}
+  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-end}
+  .foot .letters{font-family:"Oswald",sans-serif;font-weight:700;color:#fff;font-size:1.4rem;letter-spacing:.06em}
+  .foot-link{display:inline-block;margin-top:14px;font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.05em;color:#8A96A0;text-decoration:none}
+  .foot-link:hover{color:var(--amber)}
+  .foot-link+.foot-link{margin-left:18px}
+  .foot .meta{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.05em;text-align:right}
+
+  @media(max-width:860px){
+    nav{position:fixed;top:64px;left:0;right:0;bottom:0;background:var(--ink-deep);flex-direction:column;align-items:flex-start;gap:0;padding:8px 28px 28px;transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .18s ease,visibility 0s linear .18s,transform .18s ease;overflow-y:auto}
+    nav.open{opacity:1;visibility:visible;transform:none;transition:opacity .18s ease,visibility 0s linear 0s,transform .18s ease}
+    nav a{width:100%;padding:18px 0;font-size:.95rem;border-bottom:1px solid var(--line)}
+    nav a.btn-nav{margin-top:18px;padding:14px 16px;text-align:center;border-bottom:none;width:auto}
+    .nav-toggle{display:block}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a href="/" class="mark" aria-label="ALM — home">
+      <span class="amberbar"></span>
+      <span class="letters">ALM</span>
+    </a>
+    <nav id="site-nav">
+      <a href="/#perche">Perché ALM</a>
+      <a href="/#servizi">Cosa faccio</a>
+      <a href="/#metodo">Metodo</a>
+      <a href="/#perchi">Per chi</a>
+      <a href="/#strumenti">Strumenti</a>
+      <a href="/errori-vendite-pmi-manifatturiere.html">Articoli</a>
+      <a href="media.html">Media</a>
+      <a href="/#contatti">Contatti</a>
+      <a href="/contatti.html" class="btn-nav">Richiedi consulenza</a>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Apri il menu" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow">// Media</p>
+      <h1>Metodo, numeri e logistica — a colpo d'occhio.</h1>
+      <p>Materiali che uso per spiegare come lavoro: i numeri da controllare ogni mese, il problema reale dietro le trattative perse, e come gestisco la logistica per chi produce.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">01</span></div>
+      <h2>5 numeri da guardare ogni mese</h2>
+      <p class="sec-intro">Se non li misuri, stai vendendo a occhio. I cinque indicatori che controllo per primi quando analizzo una PMI manifatturiera.</p>
+      <div class="gallery">
+        <figure><img src="media/numeri-01-cover.jpg" alt="5 numeri da guardare ogni mese"></figure>
+        <figure><img src="media/numeri-02-fatturato.jpg" alt="1 Fatturato: non il totale, il trend"></figure>
+        <figure><img src="media/numeri-03-margine.jpg" alt="2 Margine: quanto resta, non quanto vendi"></figure>
+        <figure><img src="media/numeri-04-concentrazione.jpg" alt="3 Concentrazione: quanto dipendi dai primi clienti"></figure>
+        <figure><img src="media/numeri-05-nuovi-clienti.jpg" alt="4 Nuovi clienti: il motore del futuro"></figure>
+        <figure><img src="media/numeri-06-visite-ordini.jpg" alt="5 Visite verso ordini: le visite valgono se convertono"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="background:var(--ink-deep)">
+    <div class="wrap" style="color:#fff">
+      <div class="sec-head"><span class="sec-num">02</span></div>
+      <h2 style="color:#fff">Vendi bene, o vendi solo tanto?</h2>
+      <p class="sec-intro" style="color:#AEB8C1">Il tuo concorrente non ti ha battuto: il cliente non ha deciso. Fino a 6 trattative qualificate su 10 si perdono per indecisione, non per la concorrenza.</p>
+      <div class="gallery">
+        <figure><img src="media/vendibene-01-cover.jpg" alt="Vendi bene, o vendi solo tanto?"></figure>
+        <figure><img src="media/vendibene-02-dati.png" alt="Vendita B2B industriale: i dati sulle trattative qualificate"></figure>
+        <figure><img src="media/vendibene-03-metodo.jpg" alt="Metodo, non a sensazione: analisi Pareto, segmentazione clienti, riattivazione dormienti, sviluppo fornitori"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">03</span></div>
+      <h2>ALM Logistica</h2>
+      <p class="sec-intro">Un solo interlocutore per tutta la logistica: analisi, fornitori, ordini, magazzino, consegna e monitoraggio gestiti da un unico riferimento.</p>
+      <div class="gallery single">
+        <figure><img src="media/logistica-verticale.jpg" alt="Ciclo ALM logistica: analisi, fornitori, ordini, magazzino, consegna, monitoraggio"></figure>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="letters">ALM</div>
+      <div class="pay" style="font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--steel);margin-top:8px">Consulenza e management aziendale</div>
+      <a class="foot-link" href="/contatti.html">Contatti</a>
+      <a class="foot-link" href="/errori-vendite-pmi-manifatturiere.html">Articoli</a>
+      <a class="foot-link" href="/calcolatore.html">Calcolatore trattative</a>
+      <a class="foot-link" href="/privacy.html">Privacy &amp; note legali</a>
+    </div>
+    <div class="meta">
+      Alberto Mariani · Ditta individuale<br>
+      P.IVA 02798730061 · © 2026
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle=document.getElementById('nav-toggle');
+  const nav=document.getElementById('site-nav');
+  toggle.addEventListener('click',()=>{
+    const isOpen=nav.classList.toggle('open');
+    toggle.classList.toggle('open',isOpen);
+    toggle.setAttribute('aria-expanded',isOpen?'true':'false');
+    toggle.setAttribute('aria-label',isOpen?'Chiudi il menu':'Apri il menu');
+  });
+  nav.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click',()=>{
+      nav.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded','false');
+      toggle.setAttribute('aria-label','Apri il menu');
+    });
+  });
+</script>
+</body>
+</html>
