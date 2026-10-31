@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ENG3Y8VG8P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ENG3Y8VG8P');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incidenza dei costi sul fatturato: come calcolarla | ALM Consulenza &amp; Management</title>
+<meta name="description" content="Come calcolare l'incidenza dei costi sul fatturato in una PMI manifatturiera: formula, esempio numerico, costo del venduto e un calcolatore gratuito.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16212B; --ink-deep:#0F171E; --amber:#F0A202;
+    --paper:#F6F5F2; --steel:#5A6773; --line:#26333F; --line-light:#E1DED6;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"IBM Plex Sans",system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(15,23,30,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .mark{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .mark .amberbar{width:22px;height:5px;background:var(--amber);flex:none}
+  .mark .letters{font-family:"Oswald",sans-serif;font-weight:700;font-size:1.5rem;letter-spacing:.06em;color:#fff;line-height:1}
+  nav{display:flex;gap:30px;align-items:center}
+  nav a{font-family:"IBM Plex Mono",monospace;font-size:.8rem;letter-spacing:.06em;color:#B9C2CB;text-decoration:none;transition:color .2s}
+  nav a:hover{color:var(--amber)}
+  nav a.btn-nav{color:var(--ink-deep);background:var(--amber);padding:9px 16px}
+  nav a.btn-nav:hover{background:#ffb62e;color:var(--ink-deep)}
+  nav a{white-space:nowrap}
+  @media(min-width:861px) and (max-width:1180px){nav{gap:13px}nav a{font-size:.72rem;letter-spacing:.02em}nav a.btn-nav{padding:8px 10px}.wrap.bar{padding:0 18px}}
+  .nav-toggle{display:none;background:none;border:1px solid var(--line);width:44px;height:44px;flex:none;cursor:pointer;position:relative}
+  .nav-toggle span{position:absolute;left:12px;right:12px;height:2px;background:#fff;transition:.2s}
+  .nav-toggle span:nth-child(1){top:15px}
+  .nav-toggle span:nth-child(2){top:21px}
+  .nav-toggle span:nth-child(3){top:27px}
+  .nav-toggle.open span:nth-child(1){top:21px;transform:rotate(45deg)}
+  .nav-toggle.open span:nth-child(2){opacity:0}
+  .nav-toggle.open span:nth-child(3){top:21px;transform:rotate(-45deg)}
+
+  .page-hero{background:var(--ink-deep);color:#fff;padding:72px 0 56px}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber)}
+  h1{font-family:"Oswald",sans-serif;font-weight:600;text-transform:uppercase;font-size:clamp(2.1rem,5vw,3.2rem);line-height:1.02;margin-top:16px}
+  .page-hero p{margin-top:18px;max-width:56ch;color:#C7CFD6;font-size:1.05rem}
+
+  section.block{padding:72px 0}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px}
+  .sec-num{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--amber)}
+  h2{font-family:"Oswald",sans-serif;font-weight:600;text-transform:uppercase;font-size:clamp(1.5rem,3.4vw,2.2rem);margin-top:12px}
+  .sec-intro{max-width:60ch;color:var(--steel);margin-top:14px;font-size:1rem}
+
+  .gallery{margin-top:38px;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+  .gallery figure{margin:0;background:var(--ink-deep);overflow:hidden;position:relative}
+  .gallery img{display:block;width:100%;height:auto}
+  .gallery.single{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+
+
+  .article{max-width:720px;margin:0 auto;padding:64px 28px 40px}
+  .article .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber)}
+  .article h1{font-family:"Oswald",sans-serif;font-weight:600;text-transform:uppercase;font-size:clamp(1.9rem,4.6vw,2.9rem);line-height:1.05;margin-top:16px;color:var(--ink)}
+  .article .by{margin-top:14px;font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--steel)}
+  .article p{margin-top:18px;font-size:1.04rem}
+  .article .lead{font-size:1.15rem;color:var(--steel)}
+  .article h2{font-family:"Oswald",sans-serif;font-weight:600;text-transform:uppercase;font-size:1.45rem;margin-top:46px;letter-spacing:.01em}
+  .article h2 .n{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--amber);margin-right:10px}
+  .formula{margin-top:20px;background:var(--ink-deep);color:#fff;padding:22px 24px;font-family:"IBM Plex Mono",monospace;font-size:.95rem;border-left:4px solid var(--amber);overflow-x:auto}
+  table.ex{width:100%;border-collapse:collapse;margin-top:22px;font-size:.96rem}
+  table.ex th,table.ex td{padding:11px 10px;border-bottom:1px solid var(--line-light);text-align:right}
+  table.ex th:first-child,table.ex td:first-child{text-align:left}
+  table.ex th{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--steel);font-weight:500}
+  table.ex tr.tot td{font-weight:600;border-top:2px solid var(--ink)}
+  .note{margin-top:18px;font-size:.92rem;color:var(--steel)}
+  .calc{margin-top:26px;background:#fff;border:1px solid var(--line-light);padding:26px 24px}
+  .calc .row{display:grid;grid-template-columns:1fr 150px 80px;gap:12px;align-items:center;margin-top:12px}
+  .calc label{font-size:.95rem}
+  .calc input{width:100%;padding:10px 12px;font:inherit;border:1px solid var(--line-light);background:var(--paper)}
+  .calc input:focus{outline:2px solid var(--amber);outline-offset:1px}
+  .calc .pct{font-family:"IBM Plex Mono",monospace;text-align:right;color:var(--steel)}
+  .calc .tot{margin-top:20px;padding-top:18px;border-top:2px solid var(--ink);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-weight:600}
+  .calc .tot span.v{font-family:"IBM Plex Mono",monospace}
+  .calc .hint{margin:14px 0 0;font-size:.85rem;color:var(--steel)}
+  .cta-box{margin-top:56px;padding:30px 28px;background:var(--ink-deep);color:#fff}
+  .cta-box p{margin-top:0;color:#C7CFD6}
+  .cta-box a{display:inline-block;margin-top:16px;background:var(--amber);color:var(--ink-deep);text-decoration:none;padding:13px 22px;font-family:"IBM Plex Mono",monospace;font-size:.85rem;letter-spacing:.05em}
+  .cta-box a:hover{background:#ffb62e}
+  @media(max-width:560px){.calc .row{grid-template-columns:1fr 110px 62px}}
+
+  footer{background:var(--ink-deep);color:#8A96A0;padding:52px 0 44px}
+  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-end}
+  .foot .letters{font-family:"Oswald",sans-serif;font-weight:700;color:#fff;font-size:1.4rem;letter-spacing:.06em}
+  .foot-link{display:inline-block;margin-top:14px;font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.05em;color:#8A96A0;text-decoration:none}
+  .foot-link:hover{color:var(--amber)}
+  .foot-link+.foot-link{margin-left:18px}
+  .foot .meta{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.05em;text-align:right}
+
+  @media(max-width:860px){
+    nav{position:fixed;top:64px;left:0;right:0;bottom:0;background:var(--ink-deep);flex-direction:column;align-items:flex-start;gap:0;padding:8px 28px 28px;transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .18s ease,visibility 0s linear .18s,transform .18s ease;overflow-y:auto}
+    nav.open{opacity:1;visibility:visible;transform:none;transition:opacity .18s ease,visibility 0s linear 0s,transform .18s ease}
+    nav a{width:100%;padding:18px 0;font-size:.95rem;border-bottom:1px solid var(--line)}
+    nav a.btn-nav{margin-top:18px;padding:14px 16px;text-align:center;border-bottom:none;width:auto}
+    .nav-toggle{display:block}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a href="/" class="mark" aria-label="ALM — home">
+      <span class="amberbar"></span>
+      <span class="letters">ALM</span>
+    </a>
+    <nav id="site-nav">
+      <a href="/#perche">Perché ALM</a>
+      <a href="/#servizi">Cosa faccio</a>
+      <a href="/#metodo">Metodo</a>
+      <a href="/#perchi">Per chi</a>
+      <a href="/#strumenti">Strumenti</a>
+      <a href="/errori-vendite-pmi-manifatturiere.html">Articoli</a>
+      <a href="media.html">Media</a>
+      <a href="/#contatti">Contatti</a>
+      <a href="/contatti.html" class="btn-nav">Richiedi consulenza</a>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Apri il menu" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <article class="article">
+    <p class="eyebrow">// Costi · Margini · PMI manifatturiere</p>
+    <h1>Incidenza dei costi sul fatturato: come calcolarla</h1>
+    <p class="by">ALM · di Alberto Mariani</p>
+
+    <p class="lead">In molte aziende che producono si conosce il fatturato a memoria e il margine solo a fine anno, quando il commercialista consegna il bilancio. L'incidenza dei costi sul fatturato è il modo più rapido per capire, mese per mese, dove se ne va il denaro che entra.</p>
+
+    <h2><span class="n">01</span>Che cosa significa</h2>
+    <p>L'incidenza di una voce di costo dice quanti centesimi di ogni euro fatturato vengono assorbiti da quella voce. Se le materie prime incidono per il 58%, vuol dire che su 100 euro di vendite 58 servono solo per riacquistare materiale. Il resto deve coprire personale, energia, logistica e lasciare un utile.</p>
+    <p>Il valore del dato sta nel confronto: tra un mese e l'altro, tra un anno e l'altro, tra una linea di prodotto e un'altra. Una percentuale isolata dice poco, una percentuale che cambia dice dove guardare.</p>
+
+    <h2><span class="n">02</span>La formula</h2>
+    <div class="formula">Incidenza % = (costo della voce ÷ fatturato) × 100</div>
+    <p>Si calcola voce per voce, sullo stesso periodo del fatturato (stesso mese, stesso trimestre, stesso anno). La somma delle incidenze, sottratta a 100, è il margine che resta prima di imposte e oneri finanziari.</p>
+
+    <h2><span class="n">03</span>Un esempio con numeri</h2>
+    <p>Prendiamo un'azienda manifatturiera con 1.200.000 € di fatturato annuo. Ecco come potrebbe apparire il quadro dei costi:</p>
+    <table class="ex">
+      <thead><tr><th>Voce</th><th>Importo</th><th>Incidenza</th></tr></thead>
+      <tbody>
+        <tr><td>Materie prime e merci</td><td>700.000 €</td><td>58,3%</td></tr>
+        <tr><td>Personale</td><td>250.000 €</td><td>20,8%</td></tr>
+        <tr><td>Energia</td><td>60.000 €</td><td>5,0%</td></tr>
+        <tr><td>Logistica e trasporti</td><td>45.000 €</td><td>3,8%</td></tr>
+        <tr><td>Provvigioni e costi commerciali</td><td>36.000 €</td><td>3,0%</td></tr>
+        <tr class="tot"><td>Margine residuo</td><td>109.000 €</td><td>9,1%</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Cifre di esempio, non riferite a un'azienda reale.</p>
+    <p>Qui l'azienda lavora con circa il 9% di margine residuo. Se l'energia sale di un punto e mezzo e i prezzi di vendita restano fermi, quel margine scende di un sesto. È il tipo di movimento che si vede subito con questa tabella e quasi mai a occhio.</p>
+
+    <h2><span class="n">04</span>Provalo con i tuoi numeri</h2>
+    <p>Inserisci il fatturato e le tue voci di costo: il calcolo avviene nel tuo browser e nessun dato viene inviato o salvato.</p>
+    <div class="calc" id="calc">
+      <div class="row"><label for="f">Fatturato</label><input id="f" inputmode="decimal" placeholder="1200000"><span class="pct">100%</span></div>
+      <div class="row"><label for="c1">Materie prime e merci</label><input id="c1" class="cost" inputmode="decimal" placeholder="0"><span class="pct" id="p1">–</span></div>
+      <div class="row"><label for="c2">Personale</label><input id="c2" class="cost" inputmode="decimal" placeholder="0"><span class="pct" id="p2">–</span></div>
+      <div class="row"><label for="c3">Energia</label><input id="c3" class="cost" inputmode="decimal" placeholder="0"><span class="pct" id="p3">–</span></div>
+      <div class="row"><label for="c4">Logistica e trasporti</label><input id="c4" class="cost" inputmode="decimal" placeholder="0"><span class="pct" id="p4">–</span></div>
+      <div class="row"><label for="c5">Altri costi</label><input id="c5" class="cost" inputmode="decimal" placeholder="0"><span class="pct" id="p5">–</span></div>
+      <div class="tot"><span>Margine residuo</span><span class="v" id="res">–</span></div>
+      <p class="hint">Usa gli stessi periodi per fatturato e costi. Per un risultato sensato servono almeno il fatturato e una voce di costo.</p>
+    </div>
+
+    <h2><span class="n">05</span>Come farlo in Excel</h2>
+    <p>Basta un foglio con tre colonne: nella A il nome della voce, nella B l'importo, nella C la percentuale. Se il fatturato è nella cella B2, nella cella C3 scrivi:</p>
+    <div class="formula">=B3/$B$2</div>
+    <p>Poi formatta la colonna C come percentuale e trascina la formula verso il basso. Il simbolo del dollaro blocca la cella del fatturato, così il divisore resta lo stesso per tutte le righe. Aggiungi una colonna per ogni mese e ottieni subito l'andamento.</p>
+
+    <h2><span class="n">06</span>E il costo del venduto?</h2>
+    <p>Il costo del venduto è una voce diversa e più stretta: comprende solo i costi direttamente legati ai prodotti che hai venduto nel periodo. Per chi produce si calcola in genere così:</p>
+    <div class="formula">Costo del venduto = rimanenze iniziali + acquisti e costi diretti di produzione − rimanenze finali</div>
+    <p>La differenza con l'incidenza dei costi totali è questa: il costo del venduto serve a misurare il <em>margine lordo</em> (fatturato meno costo del venduto), mentre l'incidenza delle singole voci serve a capire <em>dove</em> si perde margine. Le rimanenze contano perché non tutto ciò che hai acquistato o prodotto nel mese è stato venduto nello stesso mese: guardare solo gli acquisti falsa il quadro.</p>
+
+    <h2><span class="n">07</span>Come leggere i risultati</h2>
+    <p>Non esiste un'incidenza giusta valida per tutti: dipende dal settore, dalla lavorazione e dal posizionamento. Tre domande aiutano più di qualunque valore di riferimento:</p>
+    <p><strong>Sta salendo qualche voce?</strong> Se l'incidenza di materie prime o energia cresce da tre mesi, i listini di vendita probabilmente non hanno seguito i costi.</p>
+    <p><strong>Cambia da cliente a cliente?</strong> A parità di prodotto, sconti e condizioni diverse spostano molto il margine. Spesso è lì che si nasconde il problema.</p>
+    <p><strong>Il fatturato cresce più dei costi?</strong> Vendere di più con un'incidenza che peggiora significa lavorare di più per guadagnare uguale o meno.</p>
+
+    <div class="cta-box">
+      <p>Se vuoi capire dove il tuo margine si assottiglia, posso guardare insieme a te portafoglio clienti, listini e condizioni di vendita. Una prima chiacchierata è senza impegno.</p>
+      <a href="/contatti.html">Parliamone →</a>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="letters">ALM</div>
+      <div class="pay" style="font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--steel);margin-top:8px">Consulenza e management aziendale</div>
+      <a class="foot-link" href="/contatti.html">Contatti</a>
+      <a class="foot-link" href="/errori-vendite-pmi-manifatturiere.html">Articoli</a>
+      <a class="foot-link" href="/calcolatore.html">Calcolatore trattative</a>
+      <a class="foot-link" href="/privacy.html">Privacy &amp; note legali</a>
+    </div>
+    <div class="meta">
+      Alberto Mariani · Ditta individuale<br>
+      P.IVA 02798730061 · © 2026
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle=document.getElementById('nav-toggle');
+  const nav=document.getElementById('site-nav');
+  toggle.addEventListener('click',()=>{
+    const isOpen=nav.classList.toggle('open');
+    toggle.classList.toggle('open',isOpen);
+    toggle.setAttribute('aria-expanded',isOpen?'true':'false');
+    toggle.setAttribute('aria-label',isOpen?'Chiudi il menu':'Apri il menu');
+  });
+  nav.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click',()=>{
+      nav.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded','false');
+      toggle.setAttribute('aria-label','Apri il menu');
+    });
+  });
+
+  (function(){
+    const num=v=>{v=(v||'').toString().trim().replace(/\./g,'').replace(',','.');const n=parseFloat(v);return isFinite(n)?n:0};
+    const f=document.getElementById('f'),costs=[...document.querySelectorAll('.cost')],res=document.getElementById('res');
+    const fmt=n=>n.toLocaleString('it-IT',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';
+    function calc(){
+      const fat=num(f.value);let sum=0;
+      costs.forEach((c,i)=>{const v=num(c.value);sum+=v;document.getElementById('p'+(i+1)).textContent=(fat>0&&v>0)?fmt(v/fat*100):'–'});
+      res.textContent=(fat>0&&sum>0)?fmt((fat-sum)/fat*100)+' ('+(fat-sum).toLocaleString('it-IT',{maximumFractionDigits:0})+' €)':'–';
+    }
+    [f,...costs].forEach(e=>e.addEventListener('input',calc));
+  })();
+</script>
+</body>
+</html>
